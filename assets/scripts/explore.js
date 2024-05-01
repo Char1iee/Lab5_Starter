@@ -4,17 +4,6 @@ window.addEventListener('DOMContentLoaded', init);
 
 function init() {
   // TODO
-  const voices = speechSynthesis.getVoices();
-
-  for (let i = 0; i < voices.length; i++) {
-    const option = document.createElement("option");
-    option.textContent = `${voices[i].name} (${voices[i].lang})`;
-
-    option.setAttribute("data-lang", voices[i].lang);
-    option.setAttribute("data-name", voices[i].name);
-    document.getElementById("voice-select").appendChild(option);
-  }
-
   const synth = window.speechSynthesis;
 
   const speakButton = document.querySelector("button");
@@ -23,6 +12,27 @@ function init() {
   const voiceSelect = document.querySelector("#voice-select");
   const faceImage = document.querySelector('img[alt="Smiling face"]')
 
+  let voices = [];
+
+  function populateVoiceList() {
+  
+    voices = synth.getVoices();
+  
+    for (let i = 0; i < voices.length; i++) {
+      const option = document.createElement("option");
+      option.textContent = `${voices[i].name} (${voices[i].lang})`;
+  
+      option.setAttribute("data-lang", voices[i].lang);
+      option.setAttribute("data-name", voices[i].name);
+      document.getElementById("voice-select").appendChild(option);
+    }
+  }
+
+  populateVoiceList();
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = populateVoiceList;
+  }
+  
   function speak() {
     const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
     const selectedOption =
@@ -47,8 +57,3 @@ function init() {
 
   speakButton.addEventListener('click', speak);
 }
-
-
-
-
-
