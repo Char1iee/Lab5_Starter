@@ -2,6 +2,7 @@
 Team member: Charlie Shang, Kris Chen
 
 [https://char1iee.github.io/Lab5_Starter/expose.html](https://char1iee.github.io/Lab5_Starter/expose.html)
+
 [https://char1iee.github.io/Lab5_Starter/explore.html](https://char1iee.github.io/Lab5_Starter/explore.html)
 
 1. No, because to test the "message" feature, we need to have a user interact with another user, while unit test does not allow us to test a feature that needs interaction between individual components.
